@@ -16,4 +16,11 @@ public class TaskManager {
         taskList.remove(task);
     }
 
+    public ArrayList<Task> getTasks() {
+        return taskList;
+    }
+
+    public void sortByDueDate() {
+        taskList.sort(Comparator.comparing(Task::getDueDate));
+    }
 }
