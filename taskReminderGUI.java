@@ -37,7 +37,22 @@ public class taskReminderGUI extends JFrame {
 	 */
 	public taskReminderGUI() {
 		setTitle("Task Reminder App");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+		    @Override
+		    public void windowClosing(WindowEvent e) {
+		        int choice = JOptionPane.showConfirmDialog(
+		            null,
+		            "Do you really want to exit?",
+		            "Exit Confirmation",
+		            JOptionPane.YES_NO_OPTION
+		        );
+		        if (choice == JOptionPane.YES_OPTION) {
+		            System.exit(0);
+		        }
+		    }
+		});
+
 		setBounds(100, 100, 550, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -101,7 +116,7 @@ public class taskReminderGUI extends JFrame {
 		taskList = new JList<>(listModel);
 		taskList.setBackground(lightGray);
 		JScrollPane scrollPane = new JScrollPane(taskList);
-		scrollPane.setBounds(20, 100, 490, 240);
+		scrollPane.setBounds(13, 100, 490, 240);
 		contentPane.add(scrollPane);
 
 		// Actions
