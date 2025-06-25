@@ -55,3 +55,13 @@ public class TaskReminderApp extends JFrame {
             titleField.setText("");
             dueDateField.setText("");
         });
+
+    
+        markDoneButton.addActionListener(e -> {
+            Task selectedTask = taskJList.getSelectedValue();
+            if (selectedTask != null) {
+                selectedTask.setCompleted(true);
+                updateTaskList();
+            }
+        });
+
