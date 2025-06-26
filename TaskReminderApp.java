@@ -1,7 +1,6 @@
 package src;
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class TaskReminderApp extends JFrame {
     private final TaskManager taskManager = new TaskManager();
@@ -14,43 +13,48 @@ public class TaskReminderApp extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new GridBagLayout());
+       
+        JPanel inputPanel = new JPanel(new GridBagLayout());
         inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5); 
-        
+
         JLabel titleLabel = new JLabel("Title:");
         JTextField titleField = new JTextField(15);
-
         JLabel dueDateLabel = new JLabel("Due Date (YYYY-MM-DD):");
         JTextField dueDateField = new JTextField(15);
-
         JButton addButton = new JButton("Add Task");
-        addButton.setPreferredSize(new Dimension(150, 30)); 
+        addButton.setPreferredSize(new Dimension(150, 30));
 
-        gbc.gridx = 0; gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.WEST;
-        inputPanel.add(titleLabel, gbc);
+          GridBagConstraints gbc1 = new GridBagConstraints();
+        gbc1.gridx = 0; gbc1.gridy = 0;
+        gbc1.insets = new Insets(5, 5, 5, 5);
+        inputPanel.add(titleLabel, gbc1);
 
-        gbc.gridx = 1;
-        inputPanel.add(titleField,gbc);
+        GridBagConstraints gbc2 = new GridBagConstraints();
+        gbc2.gridx = 1; gbc2.gridy = 0;
+        gbc2.insets = new Insets(5, 5, 5, 5);
+        inputPanel.add(titleField, gbc2);
 
-        gbc.gridx = 0; gbc.gridy = 1;
-        inputPanel.add(dueDateLabel, gbc);
+        GridBagConstraints gbc3 = new GridBagConstraints();
+        gbc3.gridx = 0; gbc3.gridy = 1;
+        gbc3.insets = new Insets(5, 5, 5, 5);
+        inputPanel.add(dueDateLabel, gbc3);
 
-        gbc.gridx = 1;
-        inputPanel.add(dueDateField, gbc);
+        GridBagConstraints gbc4 = new GridBagConstraints();
+        gbc4.gridx = 1; gbc4.gridy = 1;
+        gbc4.insets = new Insets(5, 5, 5, 5);
+        inputPanel.add(dueDateField, gbc4);
 
-        gbc.gridx = 0; gbc.gridy = 2;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.CENTER;
-        inputPanel.add(addButton, gbc);
+        GridBagConstraints gbc5 = new GridBagConstraints();
+        gbc5.gridx = 0; gbc5.gridy = 2;
+        gbc5.gridwidth = 2;
+        gbc5.insets = new Insets(10, 5, 5, 5);
+        gbc5.anchor = GridBagConstraints.CENTER;
+        inputPanel.add(addButton, gbc5);
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 15));
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0)); // Top and bottom margin
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 3, 15, 0));
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 
-        JButton markDoneButton = new JButton("Mark Completed");
+        JButton markDoneButton = new JButton("Mark Done");
         JButton deleteButton = new JButton("Delete Task");
         JButton sortButton = new JButton("Sort by Date");
 
@@ -63,17 +67,19 @@ public class TaskReminderApp extends JFrame {
         buttonPanel.add(deleteButton);
         buttonPanel.add(sortButton);
 
-        JScrollPane scrollPane = new JScrollPane(taskJList);
+          JScrollPane scrollPane = new JScrollPane(taskJList);
         scrollPane.setBorder(BorderFactory.createTitledBorder("Task List"));
+
         JPanel centerPanel = new JPanel(new BorderLayout());
         centerPanel.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 15));
         centerPanel.add(scrollPane, BorderLayout.CENTER);
 
+       
         add(inputPanel, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
-
+      
         addButton.addActionListener(e -> {
             String title = titleField.getText().trim();
             String dueDate = dueDateField.getText().trim();
@@ -88,7 +94,7 @@ public class TaskReminderApp extends JFrame {
             dueDateField.setText("");
         });
 
-    
+       
         markDoneButton.addActionListener(e -> {
             Task selectedTask = taskJList.getSelectedValue();
             if (selectedTask != null) {
@@ -97,6 +103,7 @@ public class TaskReminderApp extends JFrame {
             }
         });
 
+       
         deleteButton.addActionListener(e -> {
             Task selectedTask = taskJList.getSelectedValue();
             if (selectedTask != null) {
@@ -105,7 +112,8 @@ public class TaskReminderApp extends JFrame {
             }
         });
 
-         sortButton.addActionListener(e -> {
+        
+        sortButton.addActionListener(e -> {
             taskManager.sortByDueDate();
             updateTaskList();
         });
@@ -115,7 +123,7 @@ public class TaskReminderApp extends JFrame {
 
     private void updateTaskList() {
         taskListModel.clear();
-        ArrayList<Task> tasks = taskManager.getTasks();
+        Task[] tasks = taskManager.getTasks();
         for (Task task : tasks) {
             taskListModel.addElement(task);
         }
