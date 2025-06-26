@@ -1,6 +1,7 @@
 package src;
 
-public class Task{
+
+public class Task {
     private String title;
     private String dueDate;
     private boolean completed;
@@ -11,7 +12,7 @@ public class Task{
         this.completed = false;
     }
 
-    public String getTitle() {
+    public String getTitle()
         return title;
     }
 
@@ -29,7 +30,6 @@ public class Task{
 
     @Override
     public String toString() {
-        return title + " (Due: " + dueDate + ")" + (completed ? " ✔️" : "");
+    	return title + " (Due: " + dueDate + ")" + (completed ? " [Done]" : "");
     }
-
 }
