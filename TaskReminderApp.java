@@ -1,7 +1,6 @@
 package src;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 
 public class TaskReminderApp extends JFrame {
@@ -66,9 +65,12 @@ public class TaskReminderApp extends JFrame {
 
         JScrollPane scrollPane = new JScrollPane(taskJList);
         scrollPane.setBorder(BorderFactory.createTitledBorder("Task List"));
+        JPanel centerPanel = new JPanel(new BorderLayout());
+        centerPanel.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 15));
+        centerPanel.add(scrollPane, BorderLayout.CENTER);
 
         add(inputPanel, BorderLayout.NORTH);
-        add(scrollPane, BorderLayout.CENTER);
+        add(centerPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
 
