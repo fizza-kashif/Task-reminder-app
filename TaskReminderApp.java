@@ -15,32 +15,15 @@ public class TaskReminderApp extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new GridBagLayout());
+        inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); 
         
-        JPanel inputPanel = new JPanel(new GridLayout(3, 2, 5, 5));
-        JTextField titleField = new JTextField();
-        JTextField dueDateField = new JTextField();
-        JButton addButton = new JButton("Add Task");
-
-        inputPanel.add(new JLabel("Title:"));
-        inputPanel.add(titleField);
-        inputPanel.add(new JLabel("Due Date (YYYY-MM-DD):"));
-        inputPanel.add(dueDateField);
-        inputPanel.add(addButton);
-
-       
-        JPanel buttonPanel = new JPanel(new GridLayout(1, 3, 5, 5));
-        JButton markDoneButton = new JButton("Mark Completed");
-        JButton deleteButton = new JButton("Delete Task");
-        JButton sortButton = new JButton("Sort by Date");
-        buttonPanel.add(markDoneButton);
-        buttonPanel.add(deleteButton);
-        buttonPanel.add(sortButton);
-
-       
-        add(inputPanel, BorderLayout.NORTH);
-        add(new JScrollPane(taskJList), BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
-
+        JLabel titleLabel = new JLabel("Title:");
+        JTextField titleField = new JTextField(15);
+        
        
         addButton.addActionListener(e -> {
             String title = titleField.getText().trim();
