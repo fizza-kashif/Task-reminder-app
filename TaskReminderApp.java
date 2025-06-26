@@ -23,8 +23,55 @@ public class TaskReminderApp extends JFrame {
         
         JLabel titleLabel = new JLabel("Title:");
         JTextField titleField = new JTextField(15);
-        
-       
+
+        JLabel dueDateLabel = new JLabel("Due Date (YYYY-MM-DD):");
+        JTextField dueDateField = new JTextField(15);
+
+        JButton addButton = new JButton("Add Task");
+        addButton.setPreferredSize(new Dimension(150, 30)); 
+
+        gbc.gridx = 0; gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        inputPanel.add(titleLabel, gbc);
+
+        gbc.gridx = 1;
+        inputPanel.add(titleField,gbc);
+
+        gbc.gridx = 0; gbc.gridy = 1;
+        inputPanel.add(dueDateLabel, gbc);
+
+        gbc.gridx = 1;
+        inputPanel.add(dueDateField, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        inputPanel.add(addButton, gbc);
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 15));
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0)); // Top and bottom margin
+
+        JButton markDoneButton = new JButton("Mark Completed");
+        JButton deleteButton = new JButton("Delete Task");
+        JButton sortButton = new JButton("Sort by Date");
+
+        Dimension buttonSize = new Dimension(160, 30);
+        markDoneButton.setPreferredSize(buttonSize);
+        deleteButton.setPreferredSize(buttonSize);
+        sortButton.setPreferredSize(buttonSize);
+
+        buttonPanel.add(markDoneButton);
+        buttonPanel.add(deleteButton);
+        buttonPanel.add(sortButton);
+
+        JScrollPane scrollPane = new JScrollPane(taskJList);
+        scrollPane.setBorder(BorderFactory.createTitledBorder("Task List"));
+
+        add(inputPanel, BorderLayout.NORTH);
+        add(scrollPane, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
+
+
         addButton.addActionListener(e -> {
             String title = titleField.getText().trim();
             String dueDate = dueDateField.getText().trim();
